@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.demo.websocket.modules.user.dao.UserDao">
+
+    <insert id="insertUser" parameterType="com.demo.websocket.modules.user.entity.User" useGeneratedKeys="true"
+            keyColumn="id"
+            keyProperty="id">
+        insert user_info (kid, name, phone)
+        values (#{kid}, #{name}, #{phone})
+    </insert>
+
+    <select id="getById"
+            resultType="com.demo.websocket.modules.user.entity.User">
+        select * from user_info
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+        </where>
+    </select>
+
+    <select id="userList" parameterType="com.demo.websocket.modules.user.entity.User"
+            resultType="com.demo.websocket.modules.user.entity.User">
+        select *
+        from user_info
+        order by id desc
+    </select>
+
+</mapper>
